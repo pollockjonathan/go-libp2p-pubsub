@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"os"
 	"sync"
 	"time"
 
@@ -222,7 +223,14 @@ type PubOpt func(pub *PublishOptions) error
 
 // Publish publishes data to topic.
 func (t *Topic) Publish(ctx context.Context, data []byte, opts ...PubOpt) error {
-	fmt.Println("THIS IS A TEST THIS IS A TEST THIS IS A TEST")
+	file, err := os.OpenFile("/tmp/pubsub_check", os.O_RDONLY|os.O_CREATE, 0644)
+	if err != nil {
+		panic(err)
+	}
+	err = file.Close()
+	if err != nil {
+		panic(err)
+	}
 
 	t.mux.RLock()
 	defer t.mux.RUnlock()
