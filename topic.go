@@ -222,6 +222,8 @@ type PubOpt func(pub *PublishOptions) error
 
 // Publish publishes data to topic.
 func (t *Topic) Publish(ctx context.Context, data []byte, opts ...PubOpt) error {
+	fmt.Println("THIS IS A TEST THIS IS A TEST THIS IS A TEST")
+
 	t.mux.RLock()
 	defer t.mux.RUnlock()
 	if t.closed {
